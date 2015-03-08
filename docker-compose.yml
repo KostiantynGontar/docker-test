@@ -1,0 +1,19 @@
+nginx:
+  image: nginx
+  ports:
+    - "80:80"
+  links:
+    - php
+php:
+  build: .
+  links:
+    - mysql
+  #volumes:
+  #  - .:/code
+mysql:
+  image: mysql
+  environment:
+    MYSQL_ROOT_PASSWORD: very_strong_root_password
+    MYSQL_USER: wordpress
+    MYSQL_PASSWORD: strong_enought_wordpress_pass
+    MYSQL_DATABASE: wordpress
