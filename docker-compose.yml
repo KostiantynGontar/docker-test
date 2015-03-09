@@ -1,15 +1,19 @@
 nginx:
-  image: nginx
+  build: nginx/
   ports:
     - "80:80"
   links:
     - php
+  volumes_from:
+    - wp
+
 php:
-  build: .
+  build: php-fpm/
   links:
     - mysql
-  #volumes:
-  #  - .:/code
+  volumes_from:
+    - wp
+
 mysql:
   image: mysql
   environment:
@@ -17,3 +21,9 @@ mysql:
     MYSQL_USER: wordpress
     MYSQL_PASSWORD: strong_enought_wordpress_pass
     MYSQL_DATABASE: wordpress
+
+#wp:
+#  build: wordpress/
+#  volumes:
+#    - /var/www
+#    - /var/www/wp-content/uploads
