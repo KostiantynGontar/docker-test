@@ -2,10 +2,10 @@ nginx:
   build: nginx/
   ports:
     - "80:80"
-  links:
-    - php
+  #links:
+  #  - php
   volumes_from:
-    - wp
+    - php
 
 php:
   build: php-fpm/
